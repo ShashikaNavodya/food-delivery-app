@@ -1,0 +1,13 @@
+{
+  "name": "savor-food-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REST API and SQLite database for the Savor food delivery app",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
