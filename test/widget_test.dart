@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:savor_food/core/utils/formatters.dart';
 import 'package:savor_food/core/widgets/primary_button.dart';
+import 'package:savor_food/features/home/presentation/splash_screen.dart';
 
 void main() {
   test('formats Sri Lankan rupee amounts with grouped thousands', () {
@@ -24,5 +25,21 @@ void main() {
 
     await tester.tap(find.text('Place order'));
     expect(pressed, isTrue);
+  });
+
+  testWidgets('splash screen shows the Savor logo on a white background', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: SplashScreen()));
+
+    expect(find.byType(Image), findsOneWidget);
+    expect(find.text('Savor'), findsOneWidget);
+    expect(find.text('GOOD FOOD, DELIVERED.'), findsOneWidget);
+    expect(
+      tester.widget<Scaffold>(find.byType(Scaffold)).backgroundColor,
+      Colors.white,
+    );
+
+    await tester.pumpWidget(const SizedBox.shrink());
   });
 }
