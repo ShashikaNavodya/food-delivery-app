@@ -4,7 +4,7 @@
   "private": true,
   "description": "REST API and SQLite database for the Savor food delivery app",
   "scripts": {
-    "start": "node server.js",
+    "start": "node init && node server.js",
     "test": "node --test"
   },
   "engines": {

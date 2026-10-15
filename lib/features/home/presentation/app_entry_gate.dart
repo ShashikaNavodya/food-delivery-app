@@ -16,11 +16,15 @@ class AppEntryGate extends StatefulWidget {
 class _AppEntryGateState extends State<AppEntryGate> {
   late final FoodAppController _controller;
   String? _startupError;
+  bool _minimumSplashElapsed = false;
 
   @override
   void initState() {
     super.initState();
     _controller = FoodAppController(FoodRepository())..addListener(_refresh);
+    Future<void>.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) setState(() => _minimumSplashElapsed = true);
+    });
     _initialize();
   }
 
@@ -76,7 +80,9 @@ class _AppEntryGateState extends State<AppEntryGate> {
       );
     }
 
-    if (_controller.isInitializingSession) return const SplashScreen();
+    if (_controller.isInitializingSession || !_minimumSplashElapsed) {
+      return const SplashScreen();
+    }
     if (!_controller.isSignedIn) {
       return AuthScreen(controller: _controller, isEntryFlow: true);
     }
